@@ -2,21 +2,27 @@ import React from 'react';
 import './App.css';
 import Sidebar from "./Sidebar";
 import Chat from "./Chat";
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function App() {
   return (
 
     //bem naming convention
     <div className="app">
-
-
-
       <div className="app__body">
-        
-        {/*add sidebar here*/}
-        <Sidebar />
-        {/*add chat*/}
-        <Chat />
+        <Router>
+          <Switch>
+            <Route path="/app">
+                {/*add sidebar here*/}
+              <Sidebar />
+                {/*add chat*/}
+              <Chat />
+            </Route>
+            <Route path="/">
+              <h1>Home Screen</h1>
+            </Route>
+          </Switch>
+        </Router>
 
       </div>
 
