@@ -11,15 +11,26 @@ function App() {
     <div className="app">
       <div className="app__body">
         <Router>
+          <Sidebar />
+
           <Switch>
-            <Route path="/app">
+
+            {/*wild card*/}
+            {/*show comment section
+            only when we have a roomId*/}
+            <Route path="/rooms/:roomId"> 
+
+
+
                 {/*add sidebar here*/}
-              <Sidebar />
+                {/*<Sidebar />*/}
                 {/*add chat*/}
+
+
               <Chat />
             </Route>
             <Route path="/">
-              <h1>Home Screen</h1>
+              <Chat />
             </Route>
           </Switch>
         </Router>
