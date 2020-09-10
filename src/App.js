@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Sidebar from "./Sidebar";
 import Chat from "./Chat";
+import Login from "./Login";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
@@ -16,7 +17,7 @@ function App() {
     //bem naming convention
     <div className="app">
       {!user ? (
-        <h1>login screen</h1>
+        <Login />
       ): (
 
         <div className="app__body">
