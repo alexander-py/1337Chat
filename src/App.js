@@ -3,13 +3,24 @@ import './App.css';
 import Sidebar from "./Sidebar";
 import Chat from "./Chat";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+
+
 
 function App() {
+  const [user, setUser] = useState(null);
+
+
   return (
 
     //bem naming convention
     <div className="app">
-      <div className="app__body">
+      {!user ? (
+        <h1>login screen</h1>
+      ): (
+
+        <div className="app__body">
+        
         <Router>
           <Sidebar />
 
@@ -34,8 +45,10 @@ function App() {
             </Route>
           </Switch>
         </Router>
-
       </div>
+
+      )}
+
 
     </div>
   );

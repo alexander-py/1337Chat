@@ -14,7 +14,6 @@ import "./Chat.css";
 function Chat() {
 
     const [input, setInput] = useState("");
-    const [seed, setSeed] = useState("");
     const { roomId } = useParams();
 
     {/* fetch room name func */}
@@ -30,9 +29,6 @@ function Chat() {
 
     }, [roomId])
 
-    useEffect(() => {
-        setSeed(Math.floor(Math.random() * 5000));
-    }, []);
 
     const sendMessage = (e) => {
         e.preventDefault();
@@ -45,7 +41,7 @@ function Chat() {
     return (
         <div className='chat'>
             <div className="chat__header">
-                <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`}/>
+                <Avatar src={`https://avatars.dicebear.com/api/human/${Math.floor(Math.random() * 5000)}.svg`}/>
 
                 <div className="chat__headerInfo">
 
