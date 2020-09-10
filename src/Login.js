@@ -28,7 +28,7 @@ function Login() {
                     alt=""
                     />
                     <div className="login__text">
-                        <h1>Sign in</h1>
+                        <h1>Sign in to 1337 Chat</h1>
                     </div>
                     <Button type="submit" onClick={signIn}>
                         Sign in with Google
