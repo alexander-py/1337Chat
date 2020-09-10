@@ -7,6 +7,8 @@ import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import MicIcon from '@material-ui/icons/Mic';
 import { useParams } from "react-router-dom";
 import db from "./firebase";
+import firebase from "firebase";
+import { useStateValue } from "./StateProvider";
 
 
 import "./Chat.css";
@@ -15,15 +17,21 @@ function Chat() {
 
     const [input, setInput] = useState("");
     const { roomId } = useParams();
+    const [{ user }, dispatch] = useStateValue();
 
     {/* fetch room name func */}
 
     const [roomName, setRoomName] = useState(""); 
+    const [messages, setMessages] = useState([]);
 
     useEffect(() => {
         if (roomId) {
             db.collection('Rooms').doc(roomId).onSnapshot(snapshot => (
                 setRoomName(snapshot.data().name)
+            ));
+
+            db.collection('Rooms').doc(roomId).collection('messages').orderBy('timestamp','asc').onSnapshot(snapshot => (
+                setMessages(snapshot.docs.map(doc => doc.data()))
             ))
         }
 
@@ -33,6 +41,21 @@ function Chat() {
     const sendMessage = (e) => {
         e.preventDefault();
         console.log("You typed --->>", input);
+
+
+        {/*initialize all new messages when
+        they have been eneterd
+            *****user.displayName is coming from
+            google authentication
+        also use server time not local timezones
+            UK users will see UK time 
+            US users will se US time*/}
+
+        db.collection('Rooms').doc(roomId).collection('messages').add({
+            message: input,
+            name:  user.displayName,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        });
 
         setInput("");
 
@@ -67,16 +90,30 @@ function Chat() {
             </div>
 
             <div className="chat__body">
+                {messages.map(message => (
+                    <p 
 
-            <p className={`chat__message ${true && 'chat__receiver'}`}>
-                <span className="chat__name">Alexander</span>
-                Hello homies
+                    /*we need to make OP messages different
+                    than other people's messages
+                    
+                    as in the color will be different*/
 
-                <span className="chat__timestamp">
-                    3:52pm
-                </span>
-                </p>
-            
+
+                        className={`chat__message ${
+                            message.name === user.displayName && 'chat__receiver'}`}>
+
+                        {/*cast message names and message output*/}
+
+
+                        <span className="chat__name">{message.name}</span>
+                            {message.message}
+                
+                        <span className="chat__timestamp">
+                            {new Date(message.timestamp?.toDate()).toUTCString()}
+                        </span>
+                    </p>
+
+                ))}
 
 
             </div>
