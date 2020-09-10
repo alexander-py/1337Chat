@@ -72,7 +72,13 @@ function Chat() {
                     it will show the name of the room thanks to the roomname func*/}
                     
                     <h3>{roomName}</h3>
-                    <p>Last Seen at..</p>
+                    <p>
+
+
+                        last seen{" "} {/*timestamp from the last message*/}
+                        {new Date(
+                            messages[messages.length - 1]?.timestamp?.toDate()).toUTCString()}
+                            </p>
                 </div>
 
                 <div className="chat__headerRight">
@@ -96,7 +102,10 @@ function Chat() {
                     /*we need to make OP messages different
                     than other people's messages
                     
-                    as in the color will be different*/
+                    as in the color will be different
+                    but this is only good for DEMO not 
+                    for production as this will bug with
+                    name clashes*/
 
 
                         className={`chat__message ${
