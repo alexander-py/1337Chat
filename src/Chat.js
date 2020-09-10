@@ -97,7 +97,7 @@ function Chat() {
 
             <div className="chat__body">
                 {messages.map(message => (
-                    <p 
+                    <p
 
                     /*we need to make OP messages different
                     than other people's messages

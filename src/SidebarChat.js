@@ -11,17 +11,15 @@ function SidebarChat({ id, name, addNewChat }) {
 
     useEffect(() => {
         if (id) {
-
-            //go get the messages
-            //order them by timestamp desc
-            //so the first message is the most recent one
-
-            db.collection('Rooms').doc(id).collection('messages').orderBy('timestampt','desc').onSnapshot((snapshot) =>
-                setMessages(snapshot.docs.map((doc) =>
+            db.collection('Rooms').doc(id).collection('messages').orderBy('timestamp', 'desc').onSnapshot((snapshot) =>
+                setMessages(snapshot.docs.map((doc) => 
                 doc.data()))
             );
         }
+
     }, [])
+
+
 
     useEffect(() => {
 
