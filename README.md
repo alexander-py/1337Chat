@@ -75,4 +75,4 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 
 ### CHAT CLIENT OVERVIEW ###
 
-![chat2](https://i.imgur.com/IzcfSlD.png)
+![chat2](https://i.imgur.com/9AesrOo.png)
